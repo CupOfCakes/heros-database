@@ -3,6 +3,7 @@ module com.example.heros_database {
     requires javafx.fxml;
     requires javafx.graphics;
     requires java.desktop;
+    requires com.google.gson;
 
 
     opens com.example.heros_database to javafx.fxml;

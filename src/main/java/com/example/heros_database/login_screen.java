@@ -11,6 +11,8 @@ import javafx.scene.layout.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 import java.net.URL;
 
@@ -66,6 +68,29 @@ public class login_screen extends Application {
         primaryStage.setTitle("Login Screen");
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        //autheticate
+        password.setOnAction(e ->{
+            if(!username.getText().isEmpty() && !password.getText().isEmpty()){
+                login_controller controller = new login_controller(username, password);
+
+                if (controller.authenticate()) {
+                    Alert alert = new Alert(AlertType.INFORMATION);
+                    alert.setTitle("Login");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Login bem-sucedido!");
+                    alert.showAndWait();
+                } else {
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Login");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Usuário ou senha incorretos!");
+                    alert.showAndWait();
+                }
+
+            }
+
+        });
     }
 
     public static void main(String[] args) {
