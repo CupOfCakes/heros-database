@@ -21,15 +21,6 @@ public class login_controller {
         String u = usernameField.getText();
         String p = passwordField.getText();
 
-        System.out.println(auth.authenticate(u, p));
-
-        if(auth.authenticate(u, p).isPresent()){
-            System.out.println("Welcome "+u);
-            return true;
-        }
-        else{
-            System.out.println(u + " " + p);
-            return false;
-        }
+        return auth.authenticate(u, p).isPresent();
     }
 }
