@@ -1,16 +1,16 @@
-package com.example.heros_database;
+package com.example.heros_database.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class User {
-    @SerializedName("user")
-    @Expose
-    public String user;
 
-    @SerializedName("password")
-    @Expose
-    public String password;
+
+    private String user;
+
+
+
+    private String password;
 
     public User(){}
 
@@ -18,7 +18,7 @@ public class User {
         return user;
     }
 
-    public String  getPassword() {
+    public String getPassword() {
         return password;
     }
 
@@ -27,11 +27,6 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public User(String user, String password) {
-        this.user = user;
         this.password = password;
     }
 
