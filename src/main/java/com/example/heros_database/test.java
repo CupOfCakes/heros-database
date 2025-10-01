@@ -8,72 +8,58 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.List;
 
-public class test {
+public class test extends Application {
+
+    @Override
+    public void start(Stage primaryStage) {
+        TextField searchField = new TextField();
+        searchField.setPromptText("busca");
+
+        ObservableList<String> characters = FXCollections.observableArrayList(
+                "charcter 1", "charcter2", "charcter3"
+        );
+
+        FilteredList<String> filteredCharacters = new FilteredList<>(characters, s -> true);
+
+        ListView<String> listView = new ListView<>(filteredCharacters);
+
+        // Filtrar a lista conforme digita
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredCharacters.setPredicate(character -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                return character.toLowerCase().contains(lowerCaseFilter);
+            });
+        });
+
+        VBox root = new VBox(10, searchField, listView);
+        root.setPadding(new Insets(10));
+
+        Scene scene = new Scene(root, 300, 400);
+        primaryStage.setTitle("Character Search");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
     public static void main(String[] args) {
-
-        ObjectMapper mapper = new ObjectMapper();
-
-        try{
-            List<User> users = mapper.readValue(
-                    new File("src/main/resources/jsons/users.json"),
-                    new TypeReference<List<User>>(){}
-            );
-
-            for(User user:users){
-                System.out.println("Username: " + user.getUser());
-                System.out.println("Password: " + user.getPassword());
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        Gson gson = new GsonBuilder()
-                .excludeFieldsWithoutExposeAnnotation()
-                .create();
-
-        InputStream inputStream = test.class.getResourceAsStream("/jsons/users.json");
-
-        if (inputStream == null) {
-            System.out.println("Arquivo Users.json não encontrado nos resources!");
-            return;
-        }
-
-        Type userListType = new TypeToken<List<User>>() {}.getType();
-
-
-
-        try(Reader reader = new InputStreamReader(inputStream);){
-            //User user = gson.fromJson(reader, User.class);
-            List<User> users = gson.fromJson(reader, userListType);
-            System.out.println(users);
-            for (User user : users) {
-                System.out.println("Username: " + user.getUser());
-                System.out.println("Password: " + user.getPassword());
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        launch(args);
 
     }
 }

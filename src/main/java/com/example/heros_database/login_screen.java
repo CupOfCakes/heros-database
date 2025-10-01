@@ -73,11 +73,10 @@ public class login_screen extends Application {
                 login_controller controller = new login_controller(username, password);
 
                 if (controller.authenticate()) {
-                    Alert alert = new Alert(AlertType.INFORMATION);
-                    alert.setTitle("Login");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Login bem-sucedido!");
-                    alert.showAndWait();
+                    records_screen records = new records_screen();
+                    Stage stage = new Stage();
+                    records.start(stage);
+                    primaryStage.close();
                 } else {
                     Alert alert = new Alert(AlertType.ERROR);
                     alert.setTitle("Login");
