@@ -2,7 +2,7 @@ package com.example.heros_database.model;
 
 import java.util.Arrays;
 
-public class Character {
+public class Char {
     public int id;
     public String name;
     public String image;
@@ -16,7 +16,7 @@ public class Character {
     private String observationLevel;
 
     // Construtor vazio necessário para JSON
-    public Character() {}
+    public Char() {}
 
     // Getters e setters
     public int getId() { return id; }
