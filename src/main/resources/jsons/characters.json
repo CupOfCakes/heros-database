@@ -2,10 +2,10 @@
   "monstros": [
     {
       "id": "0001",
-      "nome": "Sombrius",
-      "imagem": "https://exemplo.com/imagens/sombrius.png",
-      "descricao": "Criatura formada por pura escuridão.",
-      "neutralizar": "Exposição direta à luz intensa por 10 minutos.",
+      "name": "Sombrius",
+      "image": "https://exemplo.com/imagens/sombrius.png",
+      "description": "Criatura formada por pura escuridão.",
+      "neutralize": "Exposição direta à luz intensa por 10 minutos.",
       "nivel_ameaca": "Alto",
       "nivel_observado": "Alto",
       "ultima_atualizacao": "2025-09-29",
