@@ -68,30 +68,34 @@ public class login_screen extends Application {
         primaryStage.show();
 
         //autheticate
-        password.setOnAction(e ->{
-            if(!username.getText().isEmpty() && !password.getText().isEmpty()){
-                login_controller controller = new login_controller(username, password);
+        password.setOnAction(e -> tryLogin(primaryStage,username,password));
+        username.setOnAction(e -> tryLogin(primaryStage,username,password));
 
-                if (controller.authenticate()) {
-                    records_screen records = new records_screen();
-                    Stage stage = new Stage();
-                    records.start(stage);
-                    primaryStage.close();
-                } else {
-                    Alert alert = new Alert(AlertType.ERROR);
-                    alert.setTitle("Login");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Usuário ou senha incorretos!");
-                    alert.showAndWait();
-                }
-
-            }
-
-        });
     }
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+
+    public void tryLogin(Stage primaryStage, TextField username, PasswordField password){
+        if(!username.getText().isEmpty() && !password.getText().isEmpty()){
+            login_controller controller = new login_controller(username, password);
+
+            if (controller.authenticate()) {
+                records_screen records = new records_screen();
+                Stage stage = new Stage();
+                records.start(stage);
+                primaryStage.close();
+            } else {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Login");
+                alert.setHeaderText(null);
+                alert.setContentText("Usuário ou senha incorretos!");
+                alert.showAndWait();
+            }
+
+        }
     }
 
 }

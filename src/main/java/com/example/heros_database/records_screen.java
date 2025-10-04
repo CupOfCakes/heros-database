@@ -13,6 +13,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import jdk.jshell.execution.Util;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,34 +22,14 @@ import java.util.List;
 
 public class records_screen extends Application {
 
-    private List<Char> characters ;;
 
-    private void loadCharacters(){
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            JsonNode root = mapper.readTree(new File("src/main/resources/jsons/characters.json"));
 
-            JsonNode monstrosNode = root.get("monstros");
-            JsonNode heroisNode = root.get("herois");
-            JsonNode viloesNode = root.get("viloes");
-
-            List<Char> monstros = mapper.convertValue(monstrosNode, new TypeReference<List<Char>>() {});
-            List<Char> herois = mapper.convertValue(heroisNode, new TypeReference<List<Char>>() {});
-            List<Char> viloes = mapper.convertValue(viloesNode, new TypeReference<List<Char>>() {});
-
-            characters = new ArrayList<>();
-            characters.addAll(monstros);
-            characters.addAll(herois);
-            characters.addAll(viloes);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     @Override
     public void start(Stage primaryStage){
-        loadCharacters();
+        helper hp =  new helper();
+
+        List<Char> listCharacters = hp.loadCharacters();
 
         BorderPane root = new BorderPane();
         root.setStyle("-fx-background-color: #black;");
@@ -69,7 +50,7 @@ public class records_screen extends Application {
         //names list
         VBox names = new VBox(10);
 
-        for(Char c : characters){
+        for(Char c : listCharacters){
             Label label = new Label(c.getName());
             label.setTextFill(Color.RED);
             label.setStyle("-fx-underline: true; -fx-cursor: hand");

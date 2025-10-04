@@ -46,6 +46,7 @@ public class Char {
     public String getObservationLevel() { return observationLevel; }
     public void setObservationLevel(String observationLevel) { this.observationLevel = observationLevel; }
 
+
     @Override
     public String toString() {
         return "Character{" +

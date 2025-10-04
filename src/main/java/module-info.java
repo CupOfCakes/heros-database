@@ -6,6 +6,7 @@ module com.example.heros_database {
     requires com.google.gson;
     requires com.fasterxml.jackson.databind;
     requires com.fasterxml.jackson.core;
+    requires jdk.jshell;
 
 
     opens com.example.heros_database to javafx.fxml;
